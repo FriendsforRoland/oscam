@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+{% seo %}
+    <link rel="stylesheet" href="{{ "/assets/css/style.css?v=" | append: site.github.build_revision | relative_url }}">
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    {% include head-custom.html %}
+  </head>
+  <body>
+     <div class="wrapper">
+   <center> 
+
+	
+      <header>
+          
+        
+          <img src="{{ "/" | absolute_url }}assets/img/oscam-logo.png" alt="Logo" />
+       
+
+        <p>{{ site.description | default: site.github.project_tagline }}</p>
+
+
+        <p class="view"><a href="{{ site.github.repository_url }}">View the Project on GitHub <small>{{ site.github.repository_nwo }}</small></a></p>
+     
+
+ 
+       
+        <ul class="downloads">
+ 		  <li><a href="{{ "/" | absolute_url }}oscams/oscam-git11799@3b3944ec-mipsel_s3_ssl102-webif-dvbapi-ssl-libdvbcsa-icam-extra-mixed">Download <strong>Mips 11799</strong></a></li>
+		  <li><a href="{{ "/" | absolute_url }}oscams/oscam-git11799@3b3944ec-dream_arm-webif-dvbapi-ssl-libdvbcsa-icam-neon-extra-mixed">Download <strong>Dream_arm 11799</strong></a></li>
+		  <li><a href="{{ "/" | absolute_url }}oscams/oscam-git11799@3b3944ec-dream_aarch64-webif-dvbapi-ssl-libdvbcsa-icam-neon-extra-mixed">Download <strong>Dream_aarch64 11799</strong></a></li>
+		  <li><a href="{{ "/" | absolute_url }}oscams/oscam-git11799@3b3944ec-vuplus4k_armv7a-webif-dvbapi-ssl-libdvbcsa-icam-neon-extra-mixed">Download <strong>VU_arm 11799</strong></a></li>
+		  <li><a href="{{ "/" | absolute_url }}oscams/oscam-git11799@3b3944ec-Linux-x86_64-webif-dvbapi-ssl-libdvbcsa-icam-extra-mixed">Download <strong>Linux-x86_64 11799</strong></a></li>
+	    </ul>
+       
+   
+	  </header>
+      <footer>
+      
+        <p>This project is maintained by {{ site.github.owner_name }}</p>
+      
+        
+      </footer>
+   
+	    </center>
+		 </div>
+    <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
+  </body>
+</html>
