@@ -21,7 +21,7 @@
 /* The actual popup */
 .popup .popuptext {
   visibility: hidden;
-  width: 160px;
+  width: 420px;
   background-color: #555;
   color: #fff;
   text-align: center;
@@ -31,7 +31,7 @@
   z-index: 1;
   bottom: 125%;
   left: 50%;
-  margin-left: -80px;
+  margin-left: -210px;
 }
 
 /* Popup arrow */
@@ -75,18 +75,17 @@
 	    <ul class="downloads">
  		  <li><a href="{{ "/" | absolute_url }}oscams/oscam-dream_arm-{{site.oscam-version}}">Download <strong>Dream_arm {{site.oscam-version}}</strong></a></li>
 		  <li><a href="{{ "/" | absolute_url }}oscams/oscam-dream_aarch64-{{site.oscam-version}}">Download <strong>Dream_aarch64 {{site.oscam-version}}</strong></a></li>
-		  <li><a href="{{ "/" | absolute_url }}oscams/oscam-open_arm-{{site.oscam-version}}">Download <strong>Open_arm {{site.oscam-version}}</strong></a></li>
-		  <li><a href="{{ "/" | absolute_url }}oscams/oscam-mipsel-{{site.oscam-version}}">Download <strong>Mips {{site.oscam-version}}</strong></a></li>
+		  <li><a href="{{ "/" | absolute_url }}oscams/oscam-open_arm-{{site.oscam-version}}">Download <strong>Open_arm<br></b>{{site.oscam-version}}</strong></a></li>
+		  <li><a href="{{ "/" | absolute_url }}oscams/oscam-mipsel-{{site.oscam-version}}">Download <strong>Mips<br>{{site.oscam-version}}</strong></a></li>
 		  <li><a href="{{ "/" | absolute_url }}oscams/oscam-rpi_aarch64-{{site.oscam-version}}">Download <strong>Raspi_aarch64 {{site.oscam-version}}</strong></a></li>
-		  <li><a href="{{ "/" | absolute_url }}oscams/oscam-rpi_arm-{{site.oscam-version}}">Download <strong>Raspi_arm {{site.oscam-version}}</strong></a></li>
+		  <li><a href="{{ "/" | absolute_url }}oscams/oscam-rpi_arm-{{site.oscam-version}}">Download <strong>Raspi_arm<br>{{site.oscam-version}}</strong></a></li>
 		  <li><a href="{{ "/" | absolute_url }}oscams/oscam-Linux-x86_64-{{site.oscam-version}}">Download <strong>Linux-x86_64 {{site.oscam-version}}</strong></a></li>
 	          <li><a href="{{ "/" | absolute_url }}oscams/oscam-oatv-beta7.5-{{site.oscam-version}}">Download <strong>Oatv beta 7.5 {{site.oscam-version}}</strong></a></li>
 	    </ul>
 	<div class="popup" onclick="myFunction()">click for notes on the config path
   	<span class="popuptext" id="myPopup">config paths <br>
-		Linux & Raspi /var/etc <br>
-		Receiver /etc/tuxbox/config</span>
-	</div>
+		Linux & Raspi /var/etc  &ensp;  Receiver /etc/tuxbox/config</span>
+	</div>>
 <script>
 function myFunction() {
   var popup = document.getElementById("myPopup");
