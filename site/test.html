@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://friendsforroland.github.io/oscam/assets/css/style.css?v=">
+	var site.oscam-version;
+	site.oscam-version := "11803";
   <style>
 /* Popup container - can be anything you want */
 .popup {
@@ -63,6 +65,7 @@
   from {opacity: 0;}
   to {opacity:1 ;}
 }
+
 </style> 
   </head>
   <body>
@@ -71,20 +74,19 @@
         <header>
            <img src="https://friendsforroland.github.io/oscam/assets/img/logo.png" alt="Logo" />
            <p>Oscams build by ....</p>
-		
-	 <p>version 11803</p>
+		   <p>{{site.oscam-version}}</p>
+	 <p>version 11799</p>
 	    <ul class="downloads">
- 		  <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-dream_arm-11803">Download <strong>Dream_arm 11803</strong></a></li>
-		  <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-dream_aarch64-11803">Download <strong>Dream_aarch64 11803</strong></a></li>
-		  <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-open_arm-11803">Download <strong>Open_arm<br>11803</strong></a></li>
-		  <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-mipsel-11803">Download <strong>Mips<br>11803</strong></a></li>
-		  <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-rpi_aarch64-11803">Download <strong>Raspi_aarch64 11803</strong></a></li>
-		  <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-rpi_arm-11803">Download <strong>Raspi_arm<br>11803</strong></a></li>
-		  <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-oatv-arm-beta-11803">Download <strong>Oatv 7.5 arm 11803</strong></a></li>
-          <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-oatv-mipsel-beta-11803">Download <strong>Oatv 7.5 mips 11803</strong></a></li>		  
-	      <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-Linux-x86_64-11803">Download <strong>Linux-x86_64 11803</strong></a></li> 
-		</ul> 
-	<div class="popup" onclick="myFunction()">click for notes on the config path
+ 		  <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-dream_arm-11802">Download <strong>Dream_arm 11802</strong></a></li>
+		  <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-dream_aarch64-11802">Download <strong>Dream_aarch64 11802</strong></a></li>
+		  <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-open_arm-11802">Download <strong>Open_arm<br>11802</strong></a></li>
+		  <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-mipsel-11802">Download <strong>Mips<br>11802</strong></a></li>
+		  <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-rpi_aarch64-11802">Download <strong>Raspi_aarch64 11802</strong></a></li>
+		  <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-rpi_arm-11802">Download <strong>Raspi_arm<br>11802</strong></a></li>
+		  <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-Linux-x86_64-11802">Download <strong>Linux-x86_64 11802</strong></a></li>  
+		  <li><a href="https://friendsforroland.github.io/oscam/oscams/oscam-oatv-beta7.5-11802">Download <strong>Oatv beta 7.5 11802</strong></a></li>    
+	    </ul> 
+		<div class="popup" onclick="myFunction()">click for notes on the config path
   	<span class="popuptext" id="myPopup">config paths <br>
 		Linux & Raspi /var/etc  &ensp;  Receiver /etc/tuxbox/config</span>
 	</div>
@@ -96,7 +98,7 @@ function myFunction() {
 </script>
 		
 		<center><br><a href="./../">back to current version</a></center>
-	 <center><br><br><p>This project is maintained by FriendsforRoland</p></center>  
+	 <center><br><br><p>This project is maintained by FriendsforRoland</p></center>   
 	</header>
          	    </center>
 		 </div>
