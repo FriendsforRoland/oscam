@@ -1,6 +1,6 @@
 #!/bin/bash
 #oscam_autoupdate_install
-_url=_url=https://friendsforroland.github.io/oscam
+_url=https://friendsforroland.github.io/oscam
  wget -O /usr/bin/oscam_autoupdate ${_url}/oscam_autoupdate.txt > /dev/null 2>&1
  chmod +x /usr/bin/oscam_autoupdate
   (crontab -l | sed -e '/oscam_autoupdate/d') | crontab -
