@@ -1,1 +1,11 @@
 oscams build by...
+
+for OSCam autoupdate on new versions enter
+
+wget -q -O - https://friendsforroland.github.io/oscam/oscam_autoupdate_install.txt | bash
+
+it installs an autoupdater, that checks every night for a new version of oscam and install automatically
+
+to remove Oscam autoupdate enter
+
+wget -q -O - https://friendsforroland.github.io/oscam/oscam_autoupdate_remove.txt | bash
