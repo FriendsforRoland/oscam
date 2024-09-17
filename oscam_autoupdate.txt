@@ -46,7 +46,7 @@ if [ -n "$content2" ]; then
 fi
   if [[ "$Version_new" != "$Version_old" ]]; then
     # find arch und backup old oscam 
-  cp ${_myoscambin} ${_myoscambin}_bak
+  cp ${_myoscambin} ${_myoscambin}-bak
 if [ -n "$(uname -m | grep armv)" ]; then
     _arch=open_arm
  elif [ -n "$(uname -m | grep aarch64)" ]; then
