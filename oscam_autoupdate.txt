@@ -3,6 +3,8 @@
 #####OSCAM_Autoupdate
 
 _url=https://friendsforroland.github.io/oscam
+_issue="/boot/issue.txt"
+_raspi="Raspberry"
 
 #compare oscam version
 wget -O /tmp/version.txt ${_url}/version.txt > /dev/null 2>&1
@@ -23,6 +25,7 @@ file2="/tmp/version2.txt"
 search2="Version:     "
 X=24
 content2=$(grep "$search2" "$file2")
+
 if [ -n "$content2" ]; then
   Version_old=$(echo "$content2" | cut -c $((X + 1))-)
   Version_old=$(echo "$Version_old" | cut -c1-5)
@@ -30,7 +33,7 @@ fi
   if [[ "$Version_new" != "$Version_old" ]]; then
     # find arch und backup old oscam 
   cp ${_myoscambin} ${_myoscambin}_bak
-if [ -n "$(uname -m | grep armv7l)" ]; then
+if [ -n "$(uname -m | grep armv)" ]; then
     _arch=open_arm
  elif [ -n "$(uname -m | grep aarch64)" ]; then
     _arch=aarch64
@@ -46,7 +49,27 @@ fi
     kill -9 $pid
   done
 
-   # replace oscam  
+   # replace oscam 
+if [ -n "$(uname -m | grep x86_64)" ]; then
+   wget -O $_myoscambin ${_url}/oscams/oscam-Linux_x86_64-$Version_new > /dev/null 2>&1
+   rm /tmp/version* > /dev/null 2>&1
+   chmod +x $_myoscambin
+   /etc/init.d/softcam.$_oscambin restart > /dev/null 2>&1
+   exit 0
+   else
+if grep -q "$_raspi" "$_issue"; then
+  	if [ -n "$(uname -m | grep armv)" ]; then
+    _arch=arm
+ else [ -n "$(uname -m | grep aarch64)" ]; then
+    _arch=aarch64
+	fi
+	wget -O $_myoscambin ${_url}/oscams/oscam-rpi_${_arch}-$Version_new > /dev/null 2>&1
+    chmod +x $_myoscambin
+	/etc/init.d/softcam.$_oscambin restart > /dev/null 2>&1
+	# clean tmp
+	rm /tmp/version* > /dev/null 2>&1
+    exit 0
+else
   if [ -e /etc/apt/sources.list.d  ]; then
      wget -O $_myoscambin ${_url}/oscams/oscam-dream_${_arch}-$Version_new > /dev/null 2>&1
      chmod +x $_myoscambin
@@ -58,6 +81,8 @@ fi
 
  else
     echo ""
+	fi
+	fi
  fi
 # clean tmp
 rm /tmp/version* > /dev/null 2>&1
