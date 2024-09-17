@@ -6,6 +6,20 @@ _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
 
+#check wget
+if [ -e /usr/bin/wget ]; then
+echo ""
+else
+if [ -e /etc/opkg ]; then
+opk install wget -y > /dev/null 2>&1
+elif [ -e /etc/apt/sources.list.d ]; then
+apt install wget -y > /dev/null 2>&1
+else
+  "neither opkg nor apt was found ... bailing out"
+  exit 0
+fi
+fi
+
 #compare oscam version
 wget -O /tmp/version.txt ${_url}/version.txt > /dev/null 2>&1
 file="/tmp/version.txt"
