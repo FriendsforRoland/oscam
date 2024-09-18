@@ -77,9 +77,9 @@ if [ -n "$(uname -m | grep x86_64)" ]; then
    exit 0
    else
 if grep -q "$_raspi" "$_issue"; then
-  	if [ -n "$(uname -m | grep armv)" ]; then
+  	if [ -n "$(dpkg --print-architecture | grep armhf)" ]; then
     _arch=arm
- elif [ -n "$(uname -m | grep aarch64)" ]; then
+ elif [ -n "$(dpkg --print-architecture | grep arm64)" ]; then
     _arch=aarch64
 	else
 	echo ""
