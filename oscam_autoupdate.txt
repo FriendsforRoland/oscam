@@ -20,6 +20,13 @@ else
 fi
 fi
 
+_myoscambin=$(ps xuww | grep -i oscam | grep -vE 'grep|tail' | awk '{print $11}'|uniq)
+if [[ "$_myoscambin" == "" ]] ; then
+echo "No OSCam found"
+exit 0
+fi 
+_oscambin=$(echo "$_myoscambin" | cut -c $((9 + 1))-)
+
 #compare oscam version
 wget -O /tmp/version.txt ${_url}/version.txt > /dev/null 2>&1
 file="/tmp/version.txt"
@@ -30,9 +37,6 @@ content=$(grep "$search" "$file")
 if [ -n "$content" ]; then
   Version_new=$(echo "$content" | cut -c $((X + 1))-)
 fi
-
-_myoscambin=$(ps xuww | grep -i oscam | grep -vE 'grep|tail' | awk '{print $11}'|uniq)
-_oscambin=$(echo "$_myoscambin" | cut -c $((9 + 1))-)
 
 $_myoscambin -V > /tmp/version2.txt
 file2="/tmp/version2.txt"
