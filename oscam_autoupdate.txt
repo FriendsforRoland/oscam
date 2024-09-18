@@ -22,7 +22,7 @@ fi
 
 _myoscambin=$(ps xuww | grep -i oscam | grep -vE 'grep|tail' | awk '{print $11}'|uniq)
 if [[ "$_myoscambin" == "" ]] ; then
-echo "No OSCam found"
+echo "No running OSCam found"
 exit 0
 fi 
 _oscambin=$(echo "$_myoscambin" | cut -c $((9 + 1))-)
@@ -50,7 +50,7 @@ if [ -n "$content2" ]; then
 fi
   if [[ "$Version_new" != "$Version_old" ]]; then
     # find arch und backup old oscam 
-  cp ${_myoscambin} ${_myoscambin}-bak
+  #cp ${_myoscambin} ${_myoscambin}-bak
 if [ -n "$(uname -m | grep armv)" ]; then
     _arch=open_arm
  elif [ -n "$(uname -m | grep aarch64)" ]; then
@@ -73,19 +73,23 @@ if [ -n "$(uname -m | grep x86_64)" ]; then
    rm /tmp/version* > /dev/null 2>&1
    chmod +x $_myoscambin
    /etc/init.d/softcam.$_oscambin restart > /dev/null 2>&1
+   echo "OSCam changed to $Version_new"
    exit 0
    else
 if grep -q "$_raspi" "$_issue"; then
   	if [ -n "$(uname -m | grep armv)" ]; then
     _arch=arm
- else [ -n "$(uname -m | grep aarch64)" ]; then
+ elif [ -n "$(uname -m | grep aarch64)" ]; then
     _arch=aarch64
+	else
+	echo ""
 	fi
 	wget -O $_myoscambin ${_url}/oscams/oscam-rpi_${_arch}-$Version_new > /dev/null 2>&1
     chmod +x $_myoscambin
 	/etc/init.d/softcam.$_oscambin restart > /dev/null 2>&1
 	# clean tmp
 	rm /tmp/version* > /dev/null 2>&1
+	echo "OSCam changed to $Version_new"
     exit 0
 else
   if [ -e /etc/apt/sources.list.d  ]; then
@@ -97,8 +101,8 @@ else
   fi
   /etc/init.d/softcam.$_oscambin restart > /dev/null 2>&1
 
- else
-    echo ""
+
+    echo "OSCam changed to $Version_new"
 	fi
 	fi
  fi
