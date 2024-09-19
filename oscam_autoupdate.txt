@@ -30,6 +30,13 @@ _oscambin=$(echo "$_myoscambin" | cut -c $((9 + 1))-)
 
 #compare oscam version
 wget -O /tmp/version.txt ${_url}/version.txt > /dev/null 2>&1
+_check=/tmp/version.txt
+if [ "$(wc -c < "$_check")" -eq 0 ]; then
+
+wget -O /tmp/version.txt ${_url}/version.txt > /dev/null 2>&1
+else
+echo ""
+fi
 file="/tmp/version.txt"
 search="version="
 X=8 
@@ -95,16 +102,16 @@ if grep -q "$_raspi" "$_issue" 2>/dev/null; then
     exit 0
 else
   if [ -e /etc/apt/sources.list.d  ]; then
+     systemctl stop $_oscambin.service > /dev/null 2>&1
      wget -O $_myoscambin ${_url}/oscams/oscam-dream_${_arch}-$Version_new > /dev/null 2>&1
      chmod +x $_myoscambin
-	 systemctl restart $_oscambin > /dev/null 2>&1
+	 systemctl start $_oscambin.service > /dev/null 2>&1
    else
     wget -O $_myoscambin ${_url}/oscams/oscam-${_arch}-$Version_new > /dev/null 2>&1
     chmod +x $_myoscambin
   fi
   /etc/init.d/softcam.$_oscambin restart > /dev/null 2>&1
-  systemctl restart $_oscambin > /dev/null 2>&1
-    echo "OSCam changed from $Version_old to $Version_new"
+   echo "OSCam changed from $Version_old to $Version_new"
 	fi
 	fi
 
