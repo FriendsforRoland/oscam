@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 #####OSCAM_Autoupdate
@@ -48,7 +49,14 @@ if [ -n "$content2" ]; then
   Version_old=$(echo "$content2" | cut -c $((X + 1))-)
   Version_old=$(echo "$Version_old" | cut -c1-5)
 fi
+
   if [[ "$Version_new" != "$Version_old" ]]; then
+  echo "Changing your OSCam"
+  # kill_oscam
+  for pid in `ps xuww | grep oscam | grep "$_myoscambin" | grep -v grep | awk '{print $2}'`; do
+    kill -9 $pid
+  done
+  
     # find arch und backup old oscam 
   #cp ${_myoscambin} ${_myoscambin}-bak
 if [ -n "$(uname -m | grep armv)" ]; then
@@ -57,54 +65,48 @@ if [ -n "$(uname -m | grep armv)" ]; then
     _arch=aarch64
  elif [ -n "$(uname -m | grep mips)" ]; then
     _arch=mipsel
+ elif [ -n "$(uname -m | grep x86_64)" ]; then
+   wget -O $_myoscambin ${_url}/oscams/oscam-Linux_x86_64-$Version_new > /dev/null 2>&1
+   rm /tmp/version* > /dev/null 2>&1
+   chmod +x $_myoscambin
+   /etc/init.d/softcam.$_oscambin restart > /dev/null 2>&1
+   echo "OSCam changed from $Version_old to $Version_new"
+   exit 1
  else
       echo -e "\e[31m Sorry, your device does not have the proper Emu \e[0m"
       exit 1
 fi
 
-    # kill_oscam
-  for pid in `ps xuww | grep oscam | grep "$_myoscambin" | grep -v grep | awk '{print $2}'`; do
-    kill -9 $pid
-  done
-
    # replace oscam 
-if [ -n "$(uname -m | grep x86_64)" ]; then
-   wget -O $_myoscambin ${_url}/oscams/oscam-Linux_x86_64-$Version_new > /dev/null 2>&1
-   rm /tmp/version* > /dev/null 2>&1
-   chmod +x $_myoscambin
-   /etc/init.d/softcam.$_oscambin restart > /dev/null 2>&1
-   echo "OSCam changed to $Version_new"
-   exit 0
-   else
-if grep -q "$_raspi" "$_issue"; then
+if grep -q "$_raspi" "$_issue" 2>/dev/null; then
   	if [ -n "$(dpkg --print-architecture | grep armhf)" ]; then
-    _arch=arm
+    _arch1=arm
  elif [ -n "$(dpkg --print-architecture | grep arm64)" ]; then
-    _arch=aarch64
-	else
+    _arch1=aarch64
+ else
 	echo ""
-	fi
-	wget -O $_myoscambin ${_url}/oscams/oscam-rpi_${_arch}-$Version_new > /dev/null 2>&1
+ fi
+	wget -O $_myoscambin ${_url}/oscams/oscam-rpi_${_arch1}-$Version_new > /dev/null 2>&1
     chmod +x $_myoscambin
 	/etc/init.d/softcam.$_oscambin restart > /dev/null 2>&1
 	# clean tmp
 	rm /tmp/version* > /dev/null 2>&1
-	echo "OSCam changed to $Version_new"
+	echo "OSCam changed from $Version_old to $Version_new"
     exit 0
 else
   if [ -e /etc/apt/sources.list.d  ]; then
      wget -O $_myoscambin ${_url}/oscams/oscam-dream_${_arch}-$Version_new > /dev/null 2>&1
      chmod +x $_myoscambin
+	 systemctl restart $_oscambin > /dev/null 2>&1
    else
     wget -O $_myoscambin ${_url}/oscams/oscam-${_arch}-$Version_new > /dev/null 2>&1
     chmod +x $_myoscambin
   fi
   /etc/init.d/softcam.$_oscambin restart > /dev/null 2>&1
-
-
-    echo "OSCam changed to $Version_new"
+ 
+    echo "OSCam changed from $Version_old to $Version_new"
 	fi
 	fi
- fi
+
 # clean tmp
 rm /tmp/version* > /dev/null 2>&1
