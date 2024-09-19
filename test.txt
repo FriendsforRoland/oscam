@@ -1,3 +1,4 @@
+
 #!/bin/bash
 
 #####OSCAM_Autoupdate
@@ -70,21 +71,21 @@ if [ -n "$(uname -m | grep armv)" ]; then
    chmod +x $_myoscambin
    /etc/init.d/softcam.$_oscambin restart > /dev/null 2>&1
    echo "OSCam changed to $Version_new"
-   exit 0
+   exit 1
  else
       echo -e "\e[31m Sorry, your device does not have the proper Emu \e[0m"
       exit 1
 fi
 
    # replace oscam 
-if grep -q "$_raspi" "$_issue"; then
+if grep -q "$_raspi" "$_issue" 2>/dev/null; then
   	if [ -n "$(dpkg --print-architecture | grep armhf)" ]; then
     _arch1=arm
  elif [ -n "$(dpkg --print-architecture | grep arm64)" ]; then
     _arch1=aarch64
-	else
+ else
 	echo ""
-	fi
+ fi
 	wget -O $_myoscambin ${_url}/oscams/oscam-rpi_${_arch1}-$Version_new > /dev/null 2>&1
     chmod +x $_myoscambin
 	/etc/init.d/softcam.$_oscambin restart > /dev/null 2>&1
@@ -92,7 +93,7 @@ if grep -q "$_raspi" "$_issue"; then
 	rm /tmp/version* > /dev/null 2>&1
 	echo "OSCam changed to $Version_new"
     exit 0
- else
+else
   if [ -e /etc/apt/sources.list.d  ]; then
      wget -O $_myoscambin ${_url}/oscams/oscam-dream_${_arch}-$Version_new > /dev/null 2>&1
      chmod +x $_myoscambin
