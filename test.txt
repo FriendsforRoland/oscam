@@ -81,7 +81,7 @@ if grep -q "$_raspi" "$_issue"; then
   	if [ -n "$(dpkg --print-architecture | grep armhf)" ]; then
     _arch1=arm
  elif [ -n "$(dpkg --print-architecture | grep arm64)" ]; then
-    _arch11=aarch64
+    _arch1=aarch64
 	else
 	echo ""
 	fi
