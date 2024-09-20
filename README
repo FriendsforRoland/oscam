@@ -9,3 +9,13 @@ it installs an autoupdater, that checks every night for a new version of oscam a
 to remove Oscam autoupdate enter
 
 wget -q -O - https://friendsforroland.github.io/oscam/oscam_autoupdate_remove.txt | bash
+
+if wget is missing:
+
+apt update
+apt install wget
+
+or
+
+opkg update
+opkg install wget
