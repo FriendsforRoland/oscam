@@ -1,0 +1,106 @@
+
+
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <title>Oscams build by ....</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://friendsforroland.github.io/oscam/assets/css/style.css?v=">
+  <style>
+/* Popup container - can be anything you want */
+.popup {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* The actual popup */
+.popup .popuptext {
+  visibility: hidden;
+  width: 420px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 8px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -210px;
+}
+
+/* Popup arrow */
+.popup .popuptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+  from {opacity: 0;} 
+  to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity:1 ;}
+}
+</style> 
+  </head>
+  <body>
+     <div class="wrapper">
+   <center> 
+        <header>
+           <img src="https://friendsforroland.github.io/oscam/assets/img/logo.png" alt="Logo" />
+           <p>Oscams build by ....</p>
+		
+	 <p>OSCam Autoupdate</p>
+	    <ul class="downloads">
+ 		  <li>wget -q -O - https://friendsforroland.github.io/oscam/oscam_autoupdate_install.txt | bash
+
+it installs an autoupdater, that checks every night for a new version of oscam and install automatically
+
+to remove Oscam autoupdate enter
+
+wget -q -O - https://friendsforroland.github.io/oscam/oscam_autoupdate_remove.txt | bash
+
+if wget is missing:
+
+apt update
+apt install wget
+
+or
+
+opkg update
+opkg install wget</li>
+
+		</ul> 
+			
+		<center><br><a href="./../">back to main</a></center>
+	 <center><br><p>This project is maintained by FriendsforRoland</p></center>  
+	</header>
+         	    </center>
+		 </div>
+    <script src="https://friendsforroland.github.io/oscam/assets/js/scale.fix.js"></script>
+  </body>
+</html>
