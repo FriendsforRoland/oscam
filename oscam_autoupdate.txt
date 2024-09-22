@@ -60,9 +60,9 @@ fi
   if [[ "$Version_new" != "$Version_old" ]]; then
   echo "Changing your OSCam"
   # kill_oscam
-  for pid in `ps xuww | grep oscam | grep "$_myoscambin" | grep -v grep | awk '{print $2}'`; do
-    kill -9 $pid
-  done
+  #for pid in `ps xuww | grep oscam | grep "$_myoscambin" | grep -v grep | awk '{print $2}'`; do
+   # kill -9 $pid
+  #done
   
     # find arch und backup old oscam 
   #cp ${_myoscambin} ${_myoscambin}-bak
@@ -107,6 +107,7 @@ else
      chmod +x $_myoscambin
 	 systemctl start $_oscambin.service > /dev/null 2>&1
    else
+/etc/init.d/softcam.$_oscambin stop > /dev/null 2>&1
     wget -O $_myoscambin ${_url}/oscams/oscam-${_arch}-$Version_new > /dev/null 2>&1
     chmod +x $_myoscambin
   fi
