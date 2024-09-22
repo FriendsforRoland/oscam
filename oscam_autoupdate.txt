@@ -63,6 +63,7 @@ fi
   #for pid in `ps xuww | grep oscam | grep "$_myoscambin" | grep -v grep | awk '{print $2}'`; do
    # kill -9 $pid
   #done
+  systemctl stop $_oscambin.service > /dev/null 2>&1
   /etc/init.d/softcam.$_oscambin stop > /dev/null 2>&1
     # find arch und backup old oscam 
   #cp ${_myoscambin} ${_myoscambin}-bak
@@ -95,14 +96,14 @@ if grep -q "$_raspi" "$_issue" 2>/dev/null; then
  fi
 	wget -O $_myoscambin ${_url}/oscams/oscam-rpi_${_arch1}-$Version_new > /dev/null 2>&1
     chmod +x $_myoscambin
-	/etc/init.d/softcam.$_oscambin restart > /dev/null 2>&1
+	/etc/init.d/softcam.$_oscambin start > /dev/null 2>&1
 	# clean tmp
 	rm /tmp/version* > /dev/null 2>&1
 	echo "OSCam changed from $Version_old to $Version_new"
     exit 0
 else
   if [ -e /etc/apt/sources.list.d  ]; then
-     systemctl stop $_oscambin.service > /dev/null 2>&1
+    # systemctl stop $_oscambin.service > /dev/null 2>&1
      wget -O $_myoscambin ${_url}/oscams/oscam-dream_${_arch}-$Version_new > /dev/null 2>&1
      chmod +x $_myoscambin
 	 systemctl start $_oscambin.service > /dev/null 2>&1
