@@ -63,7 +63,7 @@ fi
   #for pid in `ps xuww | grep oscam | grep "$_myoscambin" | grep -v grep | awk '{print $2}'`; do
    # kill -9 $pid
   #done
-  
+  /etc/init.d/softcam.$_oscambin stop > /dev/null 2>&1
     # find arch und backup old oscam 
   #cp ${_myoscambin} ${_myoscambin}-bak
 if [ -n "$(uname -m | grep armv)" ]; then
