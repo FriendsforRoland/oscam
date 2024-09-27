@@ -64,24 +64,24 @@ if [ -f /etc/init.d/softcam.$_oscambin ]; then
 		/etc/init.d/softcam.$_oscambin stop > /dev/null 2>&1
 		sleep 2
 fi
-if [ -f /usr/camscript/$_oscambin.sh ]; then
-		/usr/camscript/$_oscambin.sh stop > /dev/null 2>&1
+if [ -f /usr/camscript/Ncam_$_oscambin.sh ]; then
+		/usr/camscript/Ncam_$_oscambin.sh stop > /dev/null 2>&1
 		sleep 2
 fi
 if [ -f /usr/script/$_oscambin.emu ]; then
 		/usr/script/$_oscambin.emu stop > /dev/null 2>&1
 		sleep 2
 fi
-if [ -f /usr/script/$_oscambin.sh ]; then
-		/usr/script/$_oscambin.sh stop > /dev/null 2>&1
+if [ -f /usr/script/${_oscambin}_cam.sh ]; then
+		/usr/script/${_oscambin}_cam.sh stop > /dev/null 2>&1
 		sleep 2
 fi
 if [ -f /etc/cam.d/$_oscambin.sh ]; then
 		/etc/cam.d/$_oscambin.sh stop > /dev/null 2>&1
 		sleep 2
 fi
-if [ -f /usr/emu_scripts/$_oscambin.sh ]; then
-		/usr/emu_scripts/$_oscambin.sh stop > /dev/null 2>&1
+if [ -f /usr/emu_scripts/EGcam_$_oscambin.sh ]; then
+		/usr/emu_scripts/EGcam_$_oscambin.sh stop > /dev/null 2>&1
 		sleep 2
 fi
  killall -9 $_oscambin > /dev/null 2>&1
@@ -137,24 +137,24 @@ if [ -f /etc/init.d/softcam.$_oscambin ]; then
 		/etc/init.d/softcam.$_oscambin start > /dev/null 2>&1
 		sleep 2
 fi
-if [ -f /usr/camscript/$_oscambin.sh ]; then
-		/usr/camscript/$_oscambin.sh start > /dev/null 2>&1
+if [ -f /usr/camscript/Ncam_$_oscambin.sh ]; then
+		/usr/camscript/Ncam_$_oscambin.sh start > /dev/null 2>&1
 		sleep 2
 fi
 if [ -f /usr/script/$_oscambin.emu ]; then
 		/usr/script/$_oscambin.emu start > /dev/null 2>&1
 		sleep 2
 fi
-if [ -f /usr/script/$_oscambin.sh ]; then
-		/usr/script/$_oscambin.sh start > /dev/null 2>&1
+if [ -f /usr/script/${_oscambin}_cam.sh ]; then
+		/usr/script/${_oscambin}_cam.sh start > /dev/null 2>&1
 		sleep 2
 fi
 if [ -f /etc/cam.d/$_oscambin.sh ]; then
 		/etc/cam.d/$_oscambin.sh start > /dev/null 2>&1
 		sleep 2
 fi
-if [ -f /usr/emu_scripts/$_oscambin.sh ]; then
-		/usr/emu_scripts/$_oscambin.sh start > /dev/null 2>&1
+if [ -f /usr/emu_scripts/EGcam_$_oscambin.sh ]; then
+		/usr/emu_scripts/EGcam_$_oscambin.sh start > /dev/null 2>&1
 		sleep 2
 fi
 
