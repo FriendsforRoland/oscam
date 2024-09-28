@@ -88,6 +88,7 @@ if [ -f /usr/emu_scripts/EGcam_$_oscambin.sh ]; then
 		sleep 2
 fi
  killall -9 $_oscambin > /dev/null 2>&1
+kill `pidof $_oscambin`
 
     # find arch und backup old oscam 
   #cp ${_myoscambin} ${_myoscambin}-bak
@@ -98,6 +99,7 @@ if [ -n "$(uname -m | grep armv)" ]; then
  elif [ -n "$(uname -m | grep mips)" ]; then
     _arch=mipsel
  elif [ -n "$(uname -m | grep x86_64)" ]; then
+kill `pidof $_oscambin`
    wget -O $_myoscambin ${_url}/oscams/oscam-Linux_x86_64-$Version_new > /dev/null 2>&1
    rm /tmp/version* > /dev/null 2>&1
    chmod +x $_myoscambin
