@@ -65,6 +65,8 @@ fi
 fi
 if [ -f /etc/init.d/softcam.$_oscambin ]; then
 		/etc/init.d/softcam.$_oscambin stop > /dev/null 2>&1
+_file=$(find /etc/init.d/softcam* -type f -exec grep -l "$_oscambin" {} +)
+$_file stop > /dev/null 2>&1
 		sleep 2
 fi
 if [ -f /usr/camscript/Ncam_$_oscambin.sh ]; then
@@ -146,6 +148,7 @@ else
   fi
 if [ -f /etc/init.d/softcam.$_oscambin ]; then
 		/etc/init.d/softcam.$_oscambin start > /dev/null 2>&1
+		$_file start > /dev/null 2>&1
 		sleep 2
 fi
 if [ -f /usr/camscript/Ncam_$_oscambin.sh ]; then
