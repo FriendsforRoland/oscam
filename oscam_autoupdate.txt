@@ -71,6 +71,10 @@ if [ -f /usr/camscript/Ncam_$_oscambin.sh ]; then
 		/usr/camscript/Ncam_$_oscambin.sh stop > /dev/null 2>&1
 		sleep 2
 fi
+if [ -f /var/emu/script/oscam ]; then
+		/var/emu/script/oscam stop > /dev/null 2>&1
+		sleep 2
+fi
 if [ -f /usr/script/$_oscambin.emu ]; then
 		/usr/script/$_oscambin.emu stop > /dev/null 2>&1
 		sleep 2
@@ -158,6 +162,10 @@ if [ -f /usr/script/${_oscambin}_cam.sh ]; then
 fi
 if [ -f /etc/cam.d/$_oscambin.sh ]; then
 		/etc/cam.d/$_oscambin.sh start > /dev/null 2>&1
+		sleep 2
+fi
+if [ -f /var/emu/script/oscam ]; then
+		/var/emu/script/oscam start > /dev/null 2>&1
 		sleep 2
 fi
 if [ -f /usr/emu_scripts/EGcam_$_oscambin.sh ]; then
