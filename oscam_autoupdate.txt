@@ -27,7 +27,7 @@ if [[ "$_myoscambin" == "" ]] ; then
 echo "No running OSCam found"
 exit 0
 fi 
-_oscambin=$(echo "$_myoscambin" | cut -c $((9 + 1))-)
+_oscambin=$(basename "$_myoscambin")
 
 #compare oscam version
 wget -O /tmp/version.txt ${_url}/version.txt > /dev/null 2>&1
