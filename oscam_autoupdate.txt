@@ -146,11 +146,10 @@ else
     wget -O $_myoscambin ${_url}/oscams/oscam-${_arch}-$Version_new > /dev/null 2>&1
     chmod +x $_myoscambin
   fi
-if [ -f /etc/init.d/softcam.$_oscambin ]; then
-		/etc/init.d/softcam.$_oscambin start > /dev/null 2>&1
-		$_file start > /dev/null 2>&1
+if [ -f /var/emu/script/oscam ]; then
+		/var/emu/script/oscam start > /dev/null 2>&1
 		sleep 2
-fi
+fi  
 if [ -f /usr/camscript/Ncam_$_oscambin.sh ]; then
 		/usr/camscript/Ncam_$_oscambin.sh start > /dev/null 2>&1
 		sleep 2
@@ -177,6 +176,11 @@ if [ -f /usr/emu_scripts/EGcam_$_oscambin.sh ]; then
 fi
  if [ -e /etc/apt/sources.list.d  ]; then
      systemctl start $_oscambin.service > /dev/null 2>&1
+fi
+if [ -f /etc/init.d/softcam.$_oscambin ]; then
+		/etc/init.d/softcam.$_oscambin start > /dev/null 2>&1
+		$_file start > /dev/null 2>&1
+		sleep 2
 fi
 
    echo "OSCam changed from $Version_old to $Version_new"
