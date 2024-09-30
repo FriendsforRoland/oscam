@@ -105,12 +105,18 @@ if [ -n "$(uname -m | grep armv)" ]; then
  elif [ -n "$(uname -m | grep mips)" ]; then
     _arch=mipsel
  elif [ -n "$(uname -m | grep x86_64)" ]; then
-kill `pidof $_oscambin`
+kill `pidof $_oscambin` > /dev/null 2>&1
+systemctl stop $_oscambin.service > /dev/null 2>&1
+if [ -f /var/emu/script/oscam ]; then
+		/var/emu/script/oscam stop > /dev/null 2>&1
+		fi
    wget -O $_myoscambin ${_url}/oscams/oscam-Linux_x86_64-$Version_new > /dev/null 2>&1
    rm /tmp/version* > /dev/null 2>&1
    chmod +x $_myoscambin
-
-     systemctl start $_oscambin.service > /dev/null 2>&1
+if [ -f /var/emu/script/oscam ]; then
+		/var/emu/script/oscam start > /dev/null 2>&1
+		fi
+   systemctl start $_oscambin.service > /dev/null 2>&1
    /etc/init.d/softcam.$_oscambin restart > /dev/null 2>&1
    echo "OSCam changed from $Version_old to $Version_new"
    exit 1
