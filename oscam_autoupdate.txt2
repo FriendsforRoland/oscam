@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 #####OSCAM_Autoupdate
@@ -10,7 +9,7 @@ _scriptversion=0
 
 #compare script version
 wget -O /tmp/oscam_autoupdate ${_url}/oscam_autoupdate.txt > /dev/null 2>&1
-_script_new=$(sed -n '4p' /tmp/oscam_autoupdate)
+_script_new=$(sed -n '8p' /tmp/oscam_autoupdate)
 X=15
 _script_new=$(echo "$_script_new" | cut -c $((X + 1))-)
 if [[ "${_script_new}" != "${_scriptversion}" ]]; then
