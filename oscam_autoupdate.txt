@@ -9,15 +9,15 @@ _raspi="Raspberry"
 _scriptversion=0
 
 #compare script version
-wget -O /tmp/oscam_autoupdate ${_url}/oscam_autoupdate.txt > /dev/null 2>&1
-_script_new=$(sed -n '4p' /tmp/oscam_autoupdate)
-X=15
-_script_new=$(echo "$_script_new" | cut -c $((X + 1))-)
-if [[ "${_script_new}" != "${_scriptversion}" ]]; then
-cp /tmp/oscam_autoupdate /usr/bin/oscam_autoupdate
-chmod +x /usr/bin/oscam_autoupdate
-exec "$0" "$@"
-fi
+#wget -O /tmp/oscam_autoupdate ${_url}/oscam_autoupdate.txt > /dev/null 2>&1
+#_script_new=$(sed -n '4p' /tmp/oscam_autoupdate)
+#X=15
+#_script_new=$(echo "$_script_new" | cut -c $((X + 1))-)
+#if [[ "${_script_new}" != "${_scriptversion}" ]]; then
+#cp /tmp/oscam_autoupdate /usr/bin/oscam_autoupdate
+#chmod +x /usr/bin/oscam_autoupdate
+#exec "$0" "$@"
+#fi
 
 ps xuww | grep -i oscam | grep -vE 'grep|tail' | awk '{print $11}'|uniq > /tmp/oscam
 _myoscambin=$(head -n 1 /tmp/oscam)
