@@ -152,6 +152,7 @@ else
     wget -O $_myoscambin ${_url}/oscams/oscam-${_arch}-$Version_new > /dev/null 2>&1
     chmod +x $_myoscambin
   fi
+fi
 #bh
 if [ -f /usr/camscript/Ncam_$_oscambin.sh ]; then
 wget -O /tmp/oscam_update.sh ${_url}/oscam_update.sh > /dev/null 2>&1
