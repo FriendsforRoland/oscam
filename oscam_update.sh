@@ -1,7 +1,7 @@
 #!/bin/sh
 
-CAMNAME="OSCam-Installer"
-binary="oscam_bin"
+CAMNAME="OSCam"
+binary="oscam"
 
 remove_tmp () {
 	rm -rf /tmp/cainfo.* /tmp/camd.* /tmp/sc.* /tmp/*.info* /tmp/*.tmp* /tmp/oscam*
