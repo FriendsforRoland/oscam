@@ -5,7 +5,7 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=0
+_scriptversion=23
 
 #compare script version
 wget -O /tmp/oscam_autoupdate ${_url}/oscam_autoupdate.txt > /dev/null 2>&1
@@ -187,9 +187,12 @@ if [ -f /etc/init.d/softcam.$_oscambin ]; then
 fi
 
    echo "OSCam changed from $Version_old to $Version_new"
+
 	fi
 	fi
 
 # clean tmp
+ 
+ echo "OSCam up2date"
 rm /tmp/version* > /dev/null 2>&1
 rm /tmp/oscam > /dev/null 2>&1
