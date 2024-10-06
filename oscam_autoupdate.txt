@@ -5,7 +5,7 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=5
+_scriptversion=6
 
 #compare script version
 wget -O /tmp/oscam_autoupdate ${_url}/oscam_autoupdate.txt > /dev/null 2>&1
@@ -19,6 +19,8 @@ exec "$0" "$@"
 fi
 
 ps xuww | grep -i oscam | grep -vE 'grep|tail' | awk '{print $11}'|uniq > /tmp/oscam
+ps xuww | grep -i oscam | grep -vE 'grep|tail' | awk '{for (i=11; i<=26; i++) printf "%s%s", $i, (i<26 ? OFS : ORS)}'|uniq > /tmp/oscam_start
+_start=$(head -n 1 /tmp/oscam_start)
 _myoscambin=$(head -n 1 /tmp/oscam)
 if [[ "$_myoscambin" == "" ]] ; then
 echo "No running OSCam found"
@@ -302,7 +304,7 @@ cp /etc/tuxbox/config/${_oscambin}/* /etc/tuxbox/config > /dev/null 2>&1
 		sleep 2
 fi
 if [ -f /etc/init.d/softcam.${_oscambin} ]; then
-		/etc/init.d/softcam.${_oscambin} start > /dev/null 2>&1
+		#/etc/init.d/softcam.${_oscambin} start > /dev/null 2>&1
 		#$_file start > /dev/null 2>&1
 
 		sleep 2
