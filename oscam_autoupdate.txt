@@ -5,7 +5,7 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=3
+_scriptversion=4
 
 #compare script version
 wget -O /tmp/oscam_autoupdate ${_url}/oscam_autoupdate.txt > /dev/null 2>&1
@@ -195,7 +195,7 @@ EOF
 eval $binstart > /dev/null 2>&1
 _start="/usr/emu_scripts/EGcam_${_oscambin}.sh start"
 mv /tmp/oscam_update.sh /usr/emu_scripts/EGcam_${_oscambin}.sh
-
+echo "OSCam-Installer v$Version_new" > /etc/CurrentEGCamName
 chmod +x /usr/emu_scripts/EGcam_${_oscambin}.sh
 cp /etc/tuxbox/config/${_oscambin}/* /etc/tuxbox/config > /dev/null 2>&1
 #		/usr/emu_scripts/EGcam_${_oscambin}.sh start > /dev/null 2>&1
