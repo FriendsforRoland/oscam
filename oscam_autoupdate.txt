@@ -5,7 +5,7 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=4
+_scriptversion=5
 
 #compare script version
 wget -O /tmp/oscam_autoupdate ${_url}/oscam_autoupdate.txt > /dev/null 2>&1
@@ -302,8 +302,9 @@ cp /etc/tuxbox/config/${_oscambin}/* /etc/tuxbox/config > /dev/null 2>&1
 		sleep 2
 fi
 if [ -f /etc/init.d/softcam.${_oscambin} ]; then
-		#/etc/init.d/softcam.${_oscambin} start > /dev/null 2>&1
+		/etc/init.d/softcam.${_oscambin} start > /dev/null 2>&1
 		#$_file start > /dev/null 2>&1
+
 		sleep 2
 fi
  if [ -e /etc/apt/sources.list.d  ]; then
