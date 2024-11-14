@@ -8,7 +8,6 @@ _raspi="Raspberry"
 _scriptversion=7
 
 if curl -s --head ${_url}/oscam_autoupdate.txt | grep "200 OK" > /dev/null; then
-
 #compare script version
 wget -O /tmp/oscam_autoupdate ${_url}/oscam_autoupdate.txt > /dev/null 2>&1
 _script_new=$(sed -n '8p' /tmp/oscam_autoupdate)
