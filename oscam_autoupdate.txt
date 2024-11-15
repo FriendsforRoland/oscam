@@ -5,7 +5,7 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=7
+_scriptversion=8
 
 if curl -s --head ${_url}/oscam_autoupdate.txt | grep "200 OK" > /dev/null; then
 #compare script version
@@ -53,11 +53,19 @@ search2="Version:     "
 X=24
 content2=$(grep "$search2" "$file2")
 
-if [ -n "$content2" ]; then
-  Version_old=$(echo "$content2" | cut -c $((X + 1))-)
-  Version_old=$(echo "$Version_old" | cut -c1-5)
-fi
+#if [ -n "$content2" ]; then
+#  Version_old=$(echo "$content2" | cut -c $((X + 1))-)
+#  Version_old=$(echo "$Version_old" | cut -c1-5)
+#fi
+Version_old=$(  $_myoscambin --build-info | grep -i 'version:' | grep -o '[0-9]\{5\}'   )  
 
+_find_emu="/tmp/version2.txt"
+_emu_is_set="Emulator support:                        yes"
+if grep -q "$_emu_is_set" "$_find_emu" 2>/dev/null; then
+_emu="-emu"
+else
+echo ""
+fi
   if [[ "$Version_new" != "$Version_old" ]]; then
   echo "Changing your OSCam"
  if [ -e /etc/apt/sources.list.d  ]; then
@@ -110,7 +118,7 @@ systemctl stop $_oscambin.service > /dev/null 2>&1
 if [ -f /var/emu/script/oscam ]; then
 		/var/emu/script/oscam stop > /dev/null 2>&1
 		fi
-   wget -O $_myoscambin ${_url}/oscams/oscam-Linux_x86_64-$Version_new > /dev/null 2>&1
+   wget -O $_myoscambin ${_url}/oscams/oscam-Linux_x86_64-$Version_new${_emu} > /dev/null 2>&1
    rm /tmp/version* > /dev/null 2>&1
    chmod +x $_myoscambin
 if [ -f /var/emu/script/oscam ]; then
@@ -134,7 +142,7 @@ if grep -q "$_raspi" "$_issue" 2>/dev/null; then
  else
 	echo ""
  fi
-	wget -O $_myoscambin ${_url}/oscams/oscam-rpi_${_arch1}-$Version_new > /dev/null 2>&1
+	wget -O $_myoscambin ${_url}/oscams/oscam-rpi_${_arch1}-$Version_new${_emu} > /dev/null 2>&1
     chmod +x $_myoscambin
 	/etc/init.d/softcam.$_oscambin start > /dev/null 2>&1
 	# clean tmp
@@ -144,12 +152,12 @@ if grep -q "$_raspi" "$_issue" 2>/dev/null; then
 else
   if [ -e /etc/apt/sources.list.d  ]; then
     # systemctl stop $_oscambin.service > /dev/null 2>&1
-     wget -O $_myoscambin ${_url}/oscams/oscam-dream_${_arch}-$Version_new > /dev/null 2>&1
+     wget -O $_myoscambin ${_url}/oscams/oscam-dream_${_arch}-$Version_new${_emu} > /dev/null 2>&1
      chmod +x $_myoscambin
 	 systemctl start $_oscambin.service > /dev/null 2>&1
    else
 /etc/init.d/softcam.$_oscambin stop > /dev/null 2>&1
-    wget -O $_myoscambin ${_url}/oscams/oscam-${_arch}-$Version_new > /dev/null 2>&1
+    wget -O $_myoscambin ${_url}/oscams/oscam-${_arch}-$Version_new${_emu} > /dev/null 2>&1
     chmod +x $_myoscambin
   fi
 
@@ -313,7 +321,7 @@ fi
  if [ -e /etc/apt/sources.list.d  ]; then
      systemctl start ${_oscambin}.service > /dev/null 2>&1
 fi
-   echo "OSCam changed from $Version_old to $Version_new"
+   echo "OSCam changed from $Version_old${_emu} to $Version_new${_emu}"
 eval $_start > /dev/null 2>&1
 curl --noproxy '*' --data value="OSCam v${Version_new}" "http://127.0.0.1/api/saveconfig?key=config.misc.softcams" > /dev/null 2>&1
 	fi
