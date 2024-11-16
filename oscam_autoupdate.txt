@@ -5,7 +5,17 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=8
+_scriptversion=10
+
+if [ -e /etc/opkg ]; then
+  _exec_cmd="opkg"
+elif [ -e /etc/apt/sources.list.d ]; then
+  _exec_cmd="apt -y"
+ else
+   "neither opkg nor apt was found ... bailing out"
+  exit 0
+fi
+$_exec_cmd install curl >/dev/null 2>&1
 
 if curl -s --head ${_url}/oscam_autoupdate.txt | grep "200 OK" > /dev/null; then
 #compare script version
