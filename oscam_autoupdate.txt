@@ -5,7 +5,7 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=10
+_scriptversion=11
 
 if [ -e /etc/opkg ]; then
   _exec_cmd="opkg"
