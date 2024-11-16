@@ -5,9 +5,9 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=8
+_scriptversion=9
 
-if curl -s --head ${_url}/oscam_autoupdate.txt | grep "200 OK" > /dev/null; then
+#if curl -s --head ${_url}/oscam_autoupdate.txt | grep "200 OK" > /dev/null; then
 #compare script version
 wget -O /tmp/oscam_autoupdate ${_url}/oscam_autoupdate.txt > /dev/null 2>&1
 _script_new=$(sed -n '8p' /tmp/oscam_autoupdate)
@@ -335,6 +335,6 @@ curl --noproxy '*' --data value="OSCam v${Version_new}" "http://127.0.0.1/api/sa
 rm /tmp/version* > /dev/null 2>&1
 rm /tmp/oscam > /dev/null 2>&1
 
-else
-echo "Host not reachable"
-fi
+#else
+#echo "Host not reachable"
+#fi
