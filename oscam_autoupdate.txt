@@ -5,7 +5,7 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=13
+_scriptversion=14
 
 if [ -e /etc/opkg ]; then
   _exec_cmd="opkg"
@@ -167,7 +167,7 @@ else
 	 systemctl start $_oscambin.service > /dev/null 2>&1
    else
 /etc/init.d/softcam.$_oscambin stop > /dev/null 2>&1
-[[ $_emu == "-emu" ]] && [[ $_arch == "open_arm" ]]; then
+if [[ $_emu == "-emu" ]] && [[ $_arch == "open_arm" ]]; then
  _arch="open-arm"
 fi
     wget -O $_myoscambin ${_url}/oscams/oscam-${_arch}-$Version_new${_emu} > /dev/null 2>&1
