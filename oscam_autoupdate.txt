@@ -1,12 +1,12 @@
 #!/bin/bash
-
+#
 #####OSCAM_Autoupdate
-
+#
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=14
-
+_scriptversion=15
+####
 if [ -e /etc/opkg ]; then
   _exec_cmd="opkg"
 elif [ -e /etc/apt/sources.list.d ]; then
@@ -330,7 +330,7 @@ cp /etc/tuxbox/config/${_oscambin}/* /etc/tuxbox/config > /dev/null 2>&1
 		sleep 2
 fi
 if [ -f /etc/init.d/softcam.${_oscambin} ]; then
-		#/etc/init.d/softcam.${_oscambin} start > /dev/null 2>&1
+		_start="/etc/init.d/softcam.${_oscambin} restart"
 		#$_file start > /dev/null 2>&1
 
 		sleep 2
