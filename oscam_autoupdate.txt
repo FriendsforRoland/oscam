@@ -1,12 +1,11 @@
 #!/bin/bash
-#
-#####OSCAM_Autoupdate
-#
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=15
+_scriptversion=16
 ####
+
+clear
 if [ -e /etc/opkg ]; then
   _exec_cmd="opkg"
 elif [ -e /etc/apt/sources.list.d ]; then
@@ -20,7 +19,7 @@ $_exec_cmd install curl >/dev/null 2>&1
 if curl -s --head ${_url}/oscam_autoupdate.txt | grep 200 > /dev/null; then
 #compare script version
 wget -O /tmp/oscam_autoupdate ${_url}/oscam_autoupdate.txt > /dev/null 2>&1
-_script_new=$(sed -n '8p' /tmp/oscam_autoupdate)
+_script_new=$(sed -n '5p' /tmp/oscam_autoupdate)
 X=15
 _script_new=$(echo "$_script_new" | cut -c $((X + 1))-)
 if [[ "${_script_new}" != "${_scriptversion}" ]]; then
@@ -31,9 +30,15 @@ fi
 
 ps xuww | grep -i oscam | grep -vE 'grep|tail' | awk '{print $11}'|uniq > /tmp/oscam
 ps xuww | grep -i oscam | grep -vE 'grep|tail' | awk '{for (i=11; i<=26; i++) printf "%s%s", $i, (i<26 ? OFS : ORS)}'|uniq > /tmp/oscam_start
+ps xuww | grep -i oscam | grep -vE 'grep|tail' | awk '{print $11}' | uniq | awk -F/ 'BEGIN {OFS="/"} {NF--; print}' > /tmp/oscam_path
+_oscam_path=$(head -n 1 /tmp/oscam_path)
 _start=$(head -n 1 /tmp/oscam_start)
 _myoscambin=$(head -n 1 /tmp/oscam)
 if [[ "$_myoscambin" == "" ]] ; then
+echo "No running OSCam found"
+exit 0
+fi
+if [[ "$_myoscambin" == "/bin/bash" ]] ; then
 echo "No running OSCam found"
 exit 0
 fi 
@@ -46,7 +51,7 @@ if [ "$(wc -c < "$_check")" -eq 0 ]; then
 
 wget -O /tmp/version.txt ${_url}/version.txt > /dev/null 2>&1
 else
-echo ""
+echo ""  > /dev/null 2>&1
 fi
 file="/tmp/version.txt"
 search="version="
@@ -74,10 +79,16 @@ _emu_is_set="Emulator support:                        yes"
 if grep -q "$_emu_is_set" "$_find_emu" 2>/dev/null; then
 _emu="-emu"
 else
-echo ""
+echo ""  > /dev/null 2>&1
 fi
-  if [[ "$Version_new" != "$Version_old" ]]; then
-  echo "Changing your OSCam"
+echo "Found running OSCam
+Bin file: ${_oscambin} Version: ${Version_old}${_emu}
+in ${_oscam_path}"
+
+if [[ "$Version_new" != "$Version_old" ]]; then
+  echo "
+Updating to Version: $Version_new${_emu}
+ "
  if [ -e /etc/apt/sources.list.d  ]; then
      systemctl stop $_oscambin.service > /dev/null 2>&1
 fi
@@ -338,12 +349,16 @@ fi
  if [ -e /etc/apt/sources.list.d  ]; then
      systemctl start ${_oscambin}.service > /dev/null 2>&1
 fi
-   echo "OSCam changed from $Version_old${_emu} to $Version_new${_emu}"
+   echo "
+OSCam changed to $Version_new${_emu}
+"
 eval $_start > /dev/null 2>&1
 curl --noproxy '*' --data value="OSCam v${Version_new}" "http://127.0.0.1/api/saveconfig?key=config.misc.softcams" > /dev/null 2>&1
 	fi
  else
- echo "OSCam up2date"
+ echo "
+OSCam up2date
+"
  fi	
 
 # clean tmp
