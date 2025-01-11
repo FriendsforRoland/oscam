@@ -79,7 +79,8 @@ else
 echo ""  > /dev/null 2>&1
 fi
 echo "Found running OSCam
-Bin file: ${_oscambin} Version: ${Version_old}${_emu}
+Bin file: ${_oscambin}
+Version: ${Version_old}${_emu}
 in ${_oscam_path}"
 
 if [[ "$Version_new" != "$Version_old" ]]; then
