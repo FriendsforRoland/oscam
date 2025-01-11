@@ -81,7 +81,7 @@ fi
 echo "Found running OSCam
 Bin file: ${_oscambin}
 Version: ${Version_old}${_emu}
-in ${_oscam_path}"
+Location: ${_oscam_path}"
 
 if [[ "$Version_new" != "$Version_old" ]]; then
   echo "
