@@ -2,7 +2,7 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=16
+_scriptversion=17
 ####
 
 clear
@@ -23,6 +23,8 @@ _script_new=$(sed -n '5p' /tmp/oscam_autoupdate)
 X=15
 _script_new=$(echo "$_script_new" | cut -c $((X + 1))-)
 if [[ "${_script_new}" != "${_scriptversion}" ]]; then
+echo "Update OSCam autoupdate"
+sleep 2
 cp /tmp/oscam_autoupdate /usr/bin/oscam_autoupdate
 chmod +x /usr/bin/oscam_autoupdate
 exec "$0" "$@"
@@ -34,6 +36,9 @@ ps xuww | grep -i oscam | grep -vE 'grep|tail' | awk '{print $11}' | uniq | awk 
 _oscam_path=$(head -n 1 /tmp/oscam_path)
 _start=$(head -n 1 /tmp/oscam_start)
 _myoscambin=$(head -n 1 /tmp/oscam)
+_oscambin=$(basename "$_myoscambin")
+
+#no running oscam? exit
 if [[ "$_myoscambin" == "" ]] ; then
 echo "No running OSCam found"
 exit 0
@@ -42,7 +47,6 @@ if [[ "$_myoscambin" == "/bin/bash" ]] ; then
 echo "No running OSCam found"
 exit 0
 fi 
-_oscambin=$(basename "$_myoscambin")
 
 #compare oscam version
 wget -O /tmp/version.txt ${_url}/version.txt > /dev/null 2>&1
@@ -62,16 +66,9 @@ if [ -n "$content" ]; then
   Version_new=$(echo "$content" | cut -c $((X + 1))-)
 fi
 
+#get some info's about the old one
 $_myoscambin -V > /tmp/version2.txt
-file2="/tmp/version2.txt"
-search2="Version:     "
-X=24
-content2=$(grep "$search2" "$file2")
 
-#if [ -n "$content2" ]; then
-#  Version_old=$(echo "$content2" | cut -c $((X + 1))-)
-#  Version_old=$(echo "$Version_old" | cut -c1-5)
-#fi
 Version_old=$(  $_myoscambin --build-info | grep -i 'version:' | grep -o '[0-9]\{5\}'   )  
 
 _find_emu="/tmp/version2.txt"
