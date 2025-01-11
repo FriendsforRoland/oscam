@@ -1,4 +1,7 @@
 #!/bin/bash
+
+
+
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
@@ -19,7 +22,7 @@ $_exec_cmd install curl >/dev/null 2>&1
 if curl -s --head ${_url}/oscam_autoupdate.txt | grep 200 > /dev/null; then
 #compare script version
 wget -O /tmp/oscam_autoupdate ${_url}/oscam_autoupdate.txt > /dev/null 2>&1
-_script_new=$(sed -n '5p' /tmp/oscam_autoupdate)
+_script_new=$(sed -n '8p' /tmp/oscam_autoupdate)
 X=15
 _script_new=$(echo "$_script_new" | cut -c $((X + 1))-)
 if [[ "${_script_new}" != "${_scriptversion}" ]]; then
