@@ -184,7 +184,7 @@ if grep -q "$_raspi" "$_issue" 2>/dev/null; then
 else
 	if [ -e /etc/apt/sources.list.d  ]; then
 		# systemctl stop $_oscambin.service > /dev/null 2>&1
-		if [[ $_arch== "mipsel" ]]; then
+		if [[ $_arch == "mipsel" ]]; then
 		wget -O $_myoscambin ${_url}/oscams/oscam-${_arch}-$Version_new${_emu} > /dev/null 2>&1
 		else
 		wget -O $_myoscambin ${_url}/oscams/oscam-open-${_arch}-$Version_new${_emu} > /dev/null 2>&1
