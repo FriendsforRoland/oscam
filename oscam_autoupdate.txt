@@ -2,7 +2,7 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=21
+_scriptversion=22
 ####
 
 clear
@@ -185,9 +185,11 @@ else
 	if [ -e /etc/apt/sources.list.d  ]; then
 		# systemctl stop $_oscambin.service > /dev/null 2>&1
 		if [[ $_arch == "mipsel" ]]; then
-		wget -O $_myoscambin ${_url}/oscams/oscam-${_arch}-$Version_new${_emu} > /dev/null 2>&1
-		else
-		wget -O $_myoscambin ${_url}/oscams/oscam-open-${_arch}-$Version_new${_emu} > /dev/null 2>&1
+		wget -O $_myoscambin ${_url}/oscams/oscam-mipsel-$Version_new${_emu} > /dev/null 2>&1
+		elif [[ $_arch == "_open_arm" ]]; then
+		wget -O $_myoscambin ${_url}/oscams/oscam-open-arm-$Version_new${_emu} > /dev/null 2>&1
+		elif [[ $_arch == "aarch64" ]]; then
+		wget -O $_myoscambin ${_url}/oscams/oscam-dream_${_arch}-$Version_new${_emu} > /dev/null 2>&1
 		fi
 		chmod +x $_myoscambin
 		systemctl start $_oscambin.service > /dev/null 2>&1
