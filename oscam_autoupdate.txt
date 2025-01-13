@@ -195,7 +195,7 @@ else
 		systemctl start $_oscambin.service > /dev/null 2>&1
     else
 		/etc/init.d/softcam.$_oscambin stop > /dev/null 2>&1
-	if [[ $_emu == "-emu" ]] && [[ $_arch == "open_arm" ]]; then
+	if [[ $_arch == "open_arm" ]]; then
 		_arch="open-arm"
 	fi
 		wget -O $_myoscambin ${_url}/oscams/oscam-${_arch}-$Version_new${_emu} > /dev/null 2>&1
