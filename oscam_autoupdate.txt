@@ -2,7 +2,7 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=24
+_scriptversion=25
 ####
 
 clear
@@ -40,7 +40,7 @@ _oscambin=$(basename "$_myoscambin")
 
 #no running oscam? exit
 if [[ -z "$_myoscambin" || "$_myoscambin" == "/bin/bash" ]]; then
-echo -e "No running OSCam found\n"
+echo -e "\e[31m\nNo running OSCam found\n\e[0m"
 exit 0
 fi
 
@@ -301,5 +301,5 @@ rm /tmp/oscam_* > /dev/null 2>&1
 unset _emu
 
 else
-	echo -e "\nHost not reachable"
+	echo -e "\e[31m\nHost not reachable\n\e[0m"
 fi
