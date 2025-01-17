@@ -50,8 +50,6 @@ _check=/tmp/version.txt
 if [ "$(wc -c < "$_check")" -eq 0 ]; then
 
 wget -O /tmp/version.txt ${_url}/version.txt > /dev/null 2>&1
-else
-echo ""  > /dev/null 2>&1
 fi
 file="/tmp/version.txt"
 search="version="
@@ -72,19 +70,12 @@ _emu_is_set="Emulator support:                        yes"
 
 if grep -q "$_emu_is_set" "$_find_emu" 2>/dev/null; then
 	_emu="-emu"
-else
-	echo ""  > /dev/null 2>&1
 fi
 
-echo "Found running OSCam
-Bin file: ${_oscambin}
-Version: ${Version_old}${_emu}
-Location: ${_oscam_path}"
+echo -e "Found running OSCam\nBin file: ${_oscambin}\nVersion: ${Version_old}${_emu}\nLocation: ${_oscam_path}"
 
 if [[ "$Version_new" != "$Version_old" ]]; then
-  echo "
-Updating to Version: $Version_new${_emu}
- "
+  echo -e "\nUpdating to Version: $Version_new${_emu}"
  if [ -e /etc/apt/sources.list.d  ]; then
      systemctl stop $_oscambin.service > /dev/null 2>&1
 fi
@@ -167,8 +158,6 @@ if grep -q "$_raspi" "$_issue" 2>/dev/null; then
 		_arch1=arm
 	elif [ -n "$(dpkg --print-architecture | grep arm64)" ]; then
 		_arch1=aarch64
-	else
-		echo ""
 	fi
 	wget -O $_myoscambin ${_url}/oscams/oscam-rpi_${_arch1}-$Version_new${_emu} > /dev/null 2>&1
     chmod +x $_myoscambin
@@ -297,24 +286,20 @@ fi
      systemctl start ${_oscambin}.service > /dev/null 2>&1
 fi
 
-   echo "
-OSCam changed to $Version_new${_emu}
-"
+   echo -e "\nOSCam changed to $Version_new${_emu}"
 	eval $_start > /dev/null 2>&1
 	curl --noproxy '*' --data value="OSCam v${Version_new}" "http://127.0.0.1/api/saveconfig?key=config.misc.softcams" > /dev/null 2>&1
   fi
 else
- echo "
-OSCam up2date
-"
+ echo -e "\nOSCam up2date"
 fi	
 
 # clean tmp
- 
-
 rm /tmp/version* > /dev/null 2>&1
 rm /tmp/oscam > /dev/null 2>&1
+rm /tmp/oscam_* > /dev/null 2>&1
+unset _emu
 
 else
-	echo "Host not reachable"
+	echo -e "\nHost not reachable"
 fi
