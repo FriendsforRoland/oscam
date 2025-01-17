@@ -39,14 +39,10 @@ _myoscambin=$(head -n 1 /tmp/oscam)
 _oscambin=$(basename "$_myoscambin")
 
 #no running oscam? exit
-if [[ "$_myoscambin" == "" ]] ; then
-echo "No running OSCam found"
+if [[ -z "$_myoscambin" || "$_myoscambin" == "/bin/bash" ]]; then
+echo -e "No running OSCam found\n"
 exit 0
 fi
-if [[ "$_myoscambin" == "/bin/bash" ]] ; then
-echo "No running OSCam found"
-exit 0
-fi 
 
 #compare oscam version
 wget -O /tmp/version.txt ${_url}/version.txt > /dev/null 2>&1
