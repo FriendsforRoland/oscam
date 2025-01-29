@@ -2,7 +2,7 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=25
+_scriptversion=26
 ####
 
 clear
@@ -23,11 +23,11 @@ _script_new=$(sed -n '5p' /tmp/oscam_autoupdate)
 X=15
 _script_new=$(echo "$_script_new" | cut -c $((X + 1))-)
 if [[ "${_script_new}" != "${_scriptversion}" ]]; then
-echo "Update OSCam autoupdate"
-sleep 2
-cp /tmp/oscam_autoupdate /usr/bin/oscam_autoupdate
-chmod +x /usr/bin/oscam_autoupdate
-exec "$0" "$@"
+  echo "Update OSCam autoupdate"
+  sleep 2
+  cp /tmp/oscam_autoupdate /usr/bin/oscam_autoupdate
+  chmod +x /usr/bin/oscam_autoupdate
+  exec "$0" "$@"
 fi
 
 ps xuww | grep -i oscam | grep -vE 'grep|tail' | awk '{print $11}'|uniq > /tmp/oscam
@@ -137,9 +137,13 @@ if [ -n "$(uname -m | grep armv)" ]; then
 		/var/emu/script/oscam stop > /dev/null 2>&1
  fi
  
-   wget -O $_myoscambin ${_url}/oscams/oscam-Linux_x86_64-$Version_new${_emu} > /dev/null 2>&1
-   rm /tmp/version* > /dev/null 2>&1
-   chmod +x $_myoscambin
+   wget -O /tmp/oscam-Linux_x86_64-$Version_new${_emu} ${_url}/oscams/oscam-Linux_x86_64-$Version_new${_emu} > /dev/null 2>&1
+   if [ -s /tmp/oscam-Linux_x86_64-$Version_new${_emu} ]; then
+     cp /tmp/oscam-Linux_x86_64-$Version_new${_emu} $_myoscambin  > /dev/null 2>&1
+     rm /tmp/version* > /dev/null 2>&1
+     rm /tmp/oscam-Linux_x86_64-$Version_new${_emu} > /dev/null 2>&1
+     chmod +x $_myoscambin
+   fi
  if [ -f /var/emu/script/oscam ]; then
 		/var/emu/script/oscam start > /dev/null 2>&1
  fi
@@ -159,8 +163,13 @@ if grep -q "$_raspi" "$_issue" 2>/dev/null; then
 	elif [ -n "$(dpkg --print-architecture | grep arm64)" ]; then
 		_arch1=aarch64
 	fi
-	wget -O $_myoscambin ${_url}/oscams/oscam-rpi_${_arch1}-$Version_new${_emu} > /dev/null 2>&1
-    chmod +x $_myoscambin
+	wget -O /tmp/oscam-rpi_${_arch1}-$Version_new${_emu} ${_url}/oscams/oscam-rpi_${_arch1}-$Version_new${_emu} > /dev/null 2>&1
+    if [ -s /tmp/oscam-rpi_${_arch1}-$Version_new${_emu} ]; then
+      cp /tmp/oscam-rpi_${_arch1}-$Version_new${_emu} $_myoscambin  > /dev/null 2>&1
+      rm /tmp/version* > /dev/null 2>&1
+      rm /tmp/oscam-rpi_${_arch1}-$Version_new${_emu} > /dev/null 2>&1
+      chmod +x $_myoscambin
+    fi
 	/etc/init.d/softcam.$_oscambin start > /dev/null 2>&1
 	# clean tmp
 	rm /tmp/version* > /dev/null 2>&1
@@ -170,12 +179,25 @@ else
 	if [ -e /etc/apt/sources.list.d  ]; then
 		# systemctl stop $_oscambin.service > /dev/null 2>&1
 		if [[ $_arch == "mipsel" ]]; then
-		wget -O $_myoscambin ${_url}/oscams/oscam-mipsel-$Version_new${_emu} > /dev/null 2>&1
-		elif [[ $_arch == "open_arm" ]]; then
-		wget -O $_myoscambin ${_url}/oscams/oscam-open-arm-$Version_new${_emu} > /dev/null 2>&1
-		elif [[ $_arch == "aarch64" ]]; then
-		wget -O $_myoscambin ${_url}/oscams/oscam-dream_${_arch}-$Version_new${_emu} > /dev/null 2>&1
+		  wget -O /tmp/oscam-mipsel-$Version_new${_emu} ${_url}/oscams/oscam-mipsel-$Version_new${_emu} > /dev/null 2>&1
+		  if [ -s /tmp/oscam-mipsel-$Version_new${_emu} ]; then
+			cp /tmp/oscam-mipsel-$Version_new${_emu} $_myoscambin  > /dev/null 2>&1
+			rm /tmp/oscam-mipsel-$Version_new${_emu} > /dev/null 2>&1
+		  fi
 		fi
+		elif [[ $_arch == "open_arm" ]]; then
+		  wget -O /tmp/oscam-open-arm-$Version_new${_emu} ${_url}/oscams/oscam-open-arm-$Version_new${_emu} > /dev/null 2>&1
+		  if [ -s /tmp/oscam-open-arm-$Version_new${_emu} ]; then
+			cp /tmp/oscam-open-arm-$Version_new${_emu} $_myoscambin  > /dev/null 2>&1
+			rm /tmp/oscam-open-arm-$Version_new${_emu} > /dev/null 2>&1
+		  fi
+		elif [[ $_arch == "aarch64" ]]; then
+		  wget -O /tmp/oscam-dream_${_arch}-$Version_new${_emu} ${_url}/oscams/oscam-dream_${_arch}-$Version_new${_emu} > /dev/null 2>&1
+		  if [ -s /tmp/oscam-dream_${_arch}-$Version_new${_emu} ]; then
+			cp /tmp/oscam-dream_${_arch}-$Version_new${_emu} $_myoscambin  > /dev/null 2>&1
+			rm /tmp/oscam-dream_${_arch}-$Version_new${_emu} > /dev/null 2>&1
+		  fi
+		
 		chmod +x $_myoscambin
 		systemctl start $_oscambin.service > /dev/null 2>&1
     else
@@ -183,9 +205,13 @@ else
 	if [[ $_arch == "open_arm" ]]; then
 		_arch="open-arm"
 	fi
-		wget -O $_myoscambin ${_url}/oscams/oscam-${_arch}-$Version_new${_emu} > /dev/null 2>&1
-		chmod +x $_myoscambin
+	wget -O /tmp/oscam-${_arch}-$Version_new${_emu} ${_url}/oscams/oscam-${_arch}-$Version_new${_emu} > /dev/null 2>&1
+	if [ -s /tmp/oscam-${_arch}-$Version_new${_emu} ]; then
+		cp /tmp/oscam-${_arch}-$Version_new${_emu} $_myoscambin  > /dev/null 2>&1
+		rm /tmp/oscam-${_arch}-$Version_new${_emu} > /dev/null 2>&1
 	fi
+	chmod +x $_myoscambin
+fi
 
 #bh
 if [ -f /usr/camscript/Ncam_${_oscambin}.sh ]; then
