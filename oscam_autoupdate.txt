@@ -2,7 +2,7 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=26
+_scriptversion=27
 ####
 
 clear
@@ -186,7 +186,7 @@ else
 		  fi
 		fi
 		elif [[ $_arch == "open_arm" ]]; then
-		  wget -O /tmp/oscam-open-arm-$Version_new${_emu} ${_url}/oscams/oscam-open-arm-$Version_new${_emu} > /dev/null 2>&1
+		  wget -O /tmp/oscam-open-arm-$Version_new${_emu} ${_url}/oscams/oscam-open_arm-$Version_new${_emu} > /dev/null 2>&1
 		  if [ -s /tmp/oscam-open-arm-$Version_new${_emu} ]; then
 			cp /tmp/oscam-open-arm-$Version_new${_emu} $_myoscambin  > /dev/null 2>&1
 			rm /tmp/oscam-open-arm-$Version_new${_emu} > /dev/null 2>&1
@@ -203,7 +203,7 @@ else
     else
 		/etc/init.d/softcam.$_oscambin stop > /dev/null 2>&1
 	if [[ $_arch == "open_arm" ]]; then
-		_arch="open-arm"
+		_arch="open_arm"
 	fi
 	wget -O /tmp/oscam-${_arch}-$Version_new${_emu} ${_url}/oscams/oscam-${_arch}-$Version_new${_emu} > /dev/null 2>&1
 	if [ -s /tmp/oscam-${_arch}-$Version_new${_emu} ]; then
