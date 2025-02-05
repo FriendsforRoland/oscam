@@ -2,7 +2,7 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=28
+_scriptversion=29
 ####
 
 clear
@@ -195,10 +195,10 @@ else
 			rm /tmp/oscam-open-arm-$Version_new${_emu} > /dev/null 2>&1
 		  fi
 		elif [[ $_arch == "aarch64" ]]; then
-		  wget -O /tmp/oscam-dream_${_arch}-$Version_new${_emu} ${_url}/oscams/oscam-dream_${_arch}-$Version_new${_emu} > /dev/null 2>&1
-		  if [ -s /tmp/oscam-dream_${_arch}-$Version_new${_emu} ]; then
-			cp /tmp/oscam-dream_${_arch}-$Version_new${_emu} $_myoscambin  > /dev/null 2>&1
-			rm /tmp/oscam-dream_${_arch}-$Version_new${_emu} > /dev/null 2>&1
+		  wget -O /tmp/oscam-dream_aarch64-$Version_new${_emu} ${_url}/oscams/oscam-dream_aarch64-$Version_new${_emu} > /dev/null 2>&1
+		  if [ -s /tmp/oscam-dream_aarch64-$Version_new${_emu} ]; then
+			cp /tmp/oscam-dream_aarch64-$Version_new${_emu} $_myoscambin  > /dev/null 2>&1
+			rm /tmp/oscam-dream_aarch64-$Version_new${_emu} > /dev/null 2>&1
 		  fi
 		
 		chmod +x $_myoscambin
