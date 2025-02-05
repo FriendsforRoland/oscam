@@ -2,7 +2,7 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=27
+_scriptversion=28
 ####
 
 clear
@@ -177,7 +177,7 @@ if grep -q "$_raspi" "$_issue" 2>/dev/null; then
     exit 0
 else
 	if [ -e /etc/apt/sources.list.d  ]; then
-		# systemctl stop $_oscambin.service > /dev/null 2>&1
+		 systemctl stop $_oscambin.service > /dev/null 2>&1
 		if [[ $_arch == "mipsel" ]]; then
 		  wget -O /tmp/oscam-mipsel-$Version_new${_emu} ${_url}/oscams/oscam-mipsel-$Version_new${_emu} > /dev/null 2>&1
 		  if [ -s /tmp/oscam-mipsel-$Version_new${_emu} ]; then
@@ -186,7 +186,10 @@ else
 		  fi
 		fi
 		elif [[ $_arch == "open_arm" ]]; then
-		  wget -O /tmp/oscam-open-arm-$Version_new${_emu} ${_url}/oscams/oscam-open_arm-$Version_new${_emu} > /dev/null 2>&1
+		  if [[ $_emu == "-emu" ]]; then
+		     _arch="open-arm"
+		  fi
+		  wget -O /tmp/oscam-open-arm-$Version_new${_emu} ${_url}/oscams/oscam-${_arch}-$Version_new${_emu} > /dev/null 2>&1
 		  if [ -s /tmp/oscam-open-arm-$Version_new${_emu} ]; then
 			cp /tmp/oscam-open-arm-$Version_new${_emu} $_myoscambin  > /dev/null 2>&1
 			rm /tmp/oscam-open-arm-$Version_new${_emu} > /dev/null 2>&1
@@ -203,7 +206,11 @@ else
     else
 		/etc/init.d/softcam.$_oscambin stop > /dev/null 2>&1
 	if [[ $_arch == "open_arm" ]]; then
-		_arch="open_arm"
+		if [[ $_emu == "-emu" ]]; then
+		   _arch="open-arm"
+		else
+		   _arch="open_arm"
+		fi
 	fi
 	wget -O /tmp/oscam-${_arch}-$Version_new${_emu} ${_url}/oscams/oscam-${_arch}-$Version_new${_emu} > /dev/null 2>&1
 	if [ -s /tmp/oscam-${_arch}-$Version_new${_emu} ]; then
