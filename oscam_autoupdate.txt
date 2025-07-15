@@ -93,7 +93,7 @@ fi
 #get some info's about the old one
 $_myoscambin -V > /tmp/version2.txt
 
-Version_old=$(  $_myoscambin --build-info | grep -i 'version:' | grep -o '[0-9]\{5\}' | head -n 1   )  
+Version_old=$(  $_myoscambin -V | grep -i 'version:' | grep -o '[0-9]\{5\}' | head -n 1   )  
 
 _find_emu="/tmp/version2.txt"
 _emu_is_set="Emulator support:                        yes"
