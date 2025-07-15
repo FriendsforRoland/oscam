@@ -2,7 +2,7 @@
 _url=https://friendsforroland.github.io/oscam
 _issue="/boot/issue.txt"
 _raspi="Raspberry"
-_scriptversion=43
+_scriptversion=44
 
 B="Keine"
 C="JA!"
