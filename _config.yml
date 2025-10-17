@@ -4,5 +4,5 @@ plugins:
 title: Oscams build by ....
 description: Oscams build by ....
 show_downloads: true 
-oscam-version: 11892
-oscam-version-old: 11891
+oscam-version: 
+oscam-version-old: 11892
